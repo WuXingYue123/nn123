@@ -84,7 +84,7 @@ class CNN(nn.Module):
     def forward(self, x):
         x = self.conv1(x)# 第一卷积层特征提取，输入 -> 卷积 -> 激活 (ReLU由self.conv1定义)
         x = self.conv2(x)# 第二卷积层特征提取，特征图 -> 卷积 -> 激活
-        x = x.view(x.size(0), -1)
+        x = x.view(x.size(0), -1) # 将多维特征张量展平为二维张量，准备输入全连接层
         out1 = self.out1(x)# 第一个全连接层 + 激活函数，线性变换: [B, in_features] -> [B, hidden_features]
         out1 = F.relu(out1)# 应用ReLU激活函数引入非线性
         out1 = self.dropout(out1)
